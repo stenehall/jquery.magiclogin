@@ -50,10 +50,13 @@ jQuery.fn.magicLogin = function (options) {
 	username, password, passwordClear, len,
 	update_size = function (offset)
 	{
-		 offset = typeof(offset) != 'undefined' ? offset : options.offset;
-
+		offset = typeof(offset) !== 'undefined' ? offset : options.offset;
 		len = username.val().length + offset;
-		if (len > options.passwordSize)
+		if (len === 0)
+		{
+			len = 1;
+		}
+		else if (len > options.passwordSize)
 		{
 			len = options.passwordSize;
 		}
