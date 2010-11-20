@@ -5,7 +5,7 @@ body {
 section {
 	background: #fff;
 	display: block;
-	margin: 20px;
+	margin: 150px auto;
 	-moz-box-shadow: 0 0 10px #888;
 	-webkit-box-shadow: 0 0 10px #888;
 	box-shadow: 0 0 10px #888;

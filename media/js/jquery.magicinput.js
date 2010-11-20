@@ -48,9 +48,11 @@ jQuery.fn.magicLogin = function (options) {
 		that: this
 	},
 	username, password, passwordClear, len,
-	update_size = function ()
+	update_size = function (offset)
 	{
-		len = username.val().length + options.offset;
+		 offset = typeof(offset) != 'undefined' ? offset : options.offset;
+
+		len = username.val().length + offset;
 		if (len > options.passwordSize)
 		{
 			len = options.passwordSize;
@@ -58,49 +60,70 @@ jQuery.fn.magicLogin = function (options) {
 		if (username.attr("size") !== len)
 		{
 			username.attr('size', len);
-			passwordClear.attr('size', (options.passwordSize + options.usernameSize) - len);
-			password.attr('size', (options.passwordSize + options.usernameSize) - len);
+			var pw_len = (options.passwordSize + options.usernameSize) - len;
+			passwordClear.attr('size', pw_len);
+			password.attr('size', pw_len);
 		}
 	};
 
 	options = jQuery.extend(defaults, options);
+	// Makes it easier to style with/without javascript enabled
 	jQuery(this).addClass(options.activeClass);
+	// For easier access
 	username = jQuery(options.username);
 	password = jQuery(options.password);
+	options.defaultUsername = username.attr('value');
 
+	// Our extra input field that displays our password copy from the start
 	passwordClear = jQuery('<input id="' + options.passwordClear + '" type="input" value="' + password.attr('value') + '">').insertAfter(password);
-
-	len = username.val().length;
-	username.attr('size', len);
-	passwordClear.attr('size', (options.passwordSize + options.usernameSize) - len);
-	password.attr('size', (options.passwordSize + options.usernameSize) - len);
-
-	passwordClear.show();
 	password.hide();
+
+	update_size(0);
 
 	username.keydown(function (event)
 	{
-		// Catch the first white-space and change focus
-		if (event.keyCode === 32)
+		// Catch the first white-space or tab and change focus.
+		if (event.keyCode === 32 || event.keyCode === 9)
 		{
 			passwordClear.focus();
-			return false;
 		}
-		update_size();
+		else
+		{
+			update_size(1);
+		}
 	});
 
 	/*
-	 * 
-	 *
+	 * Feels nasty to update the sizes twice but this is the only way I could think of.
+	 * Without it the username size will not update when cleared
 	 */
+	username.keyup(function (event)
+	{
+		update_size(0);
+	});
+
+	username.focus(function ()
+	{
+		if (username.attr('value') === options.defaultUsername)
+		{
+			username.attr('value', '');
+			update_size(1);
+		}
+	});
+
+	username.blur(function ()
+	{
+		if (username.attr('value') === '')
+		{
+			username.attr('value', options.defaultUsername);
+		}
+	});
+
 	passwordClear.focus(function ()
 	{
-		options.offset = 0;
-		update_size();
+		update_size(0);
 		passwordClear.hide();
 		password.show();
-		password.focus();
-		password.attr('value', '');	
-		options.offset = 1;
+		password.focus().select();
 	});
 };
