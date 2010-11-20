@@ -86,6 +86,7 @@ jQuery.fn.magicLogin = function (options) {
 		if (event.keyCode === 32 || event.keyCode === 9)
 		{
 			passwordClear.focus();
+			return false;
 		}
 		else
 		{
@@ -107,7 +108,7 @@ jQuery.fn.magicLogin = function (options) {
 		if (username.attr('value') === options.defaultUsername)
 		{
 			username.attr('value', '');
-			update_size(1);
+			update_size();
 		}
 	});
 
@@ -116,6 +117,7 @@ jQuery.fn.magicLogin = function (options) {
 		if (username.attr('value') === '')
 		{
 			username.attr('value', options.defaultUsername);
+			update_size(0);
 		}
 	});
 
