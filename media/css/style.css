@@ -23,13 +23,13 @@ section {
 	-moz-border-radius: 5px;
 	}
 
-label {
+#container label {
 	display: block;
 	padding-bottom: 5px;
 	font: 10px/1 Verdana;
 	}
 
-input {
+#container input {
 	font: 12px/1 Monospace;
 	outline: none;
 	border: none;
@@ -40,7 +40,7 @@ input {
 	color: #ccc;
 	}
 
-input:focus {
+#container input:focus {
 	color: #000;
 	}
 
@@ -48,7 +48,7 @@ input:focus {
 	padding-left: 0;
 	}
 
-.submit {
+#container .submit {
 	background: #333;
 	font: 14px/1 Verdana;
 	padding: 10px;
