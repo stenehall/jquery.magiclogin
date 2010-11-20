@@ -14,7 +14,7 @@ section {
 	padding: 30px;
 	}
 
-#magiclogin-container {
+.magic-logic {
 	border: 1px solid #ccc;
 	display: inline-block;
 	padding: 0 0 0 10px;
@@ -24,13 +24,13 @@ section {
 	-webkit-border-radius: 5px;
 	}
 
-#magiclogin-container label {
+.magic-logic label {
 	display: block;
 	padding-bottom: 5px;
 	font: 10px/1 Verdana;
 	}
 
-#magiclogin-container input {
+.magic-logic input {
 	font: 12px/1 Monospace;
 	outline: none;
 	border: none;
@@ -41,15 +41,15 @@ section {
 	color: #ccc;
 	}
 
-#magiclogin-container input:focus {
+.magic-logic input:focus {
 	color: #000;
 	}
 
-#magiclogin-container #username {
+.magic-logic #username {
 	padding-left: 0;
 	}
 
-#magiclogin-container .submit {
+.magic-logic .submit {
 	background: #333;
 	font: 14px/1 Verdana;
 	padding: 10px;
