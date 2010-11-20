@@ -21,6 +21,7 @@ section {
 	margin: 0;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	}
 
 #magiclogin-container label {
@@ -55,4 +56,5 @@ section {
 	margin: -1px;
 	border-radius: 0 5px 5px 0;
 	-moz-border-radius: 0 5px 5px 0;
+	-webkit-border-radius: 0 5px 5px 0;
 	}
