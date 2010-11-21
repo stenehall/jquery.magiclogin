@@ -26,9 +26,7 @@ div.magic-logic {
 	}
 
 .magic-logic label {
-	display: block;
-	padding-bottom: 5px;
-	font: 10px/1 Verdana;
+	display: inline;
 	}
 
 .magic-logic input {
@@ -48,6 +46,10 @@ div.magic-logic {
 
 .magic-logic #username {
 	padding-left: 0;
+	}
+
+.magic-logic label span {
+	display: none;
 	}
 
 .magic-logic .submit {
