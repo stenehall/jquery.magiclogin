@@ -3,7 +3,7 @@ body {
 	/* Pattern from http://www.squidfingers.com/patterns/ */
 	}
 
-section {
+section.magicl-ogin {
 	background: #fff;
 	display: block;
 	margin: 150px auto;
@@ -15,7 +15,7 @@ section {
 	padding: 30px;
 	}
 
-.magic-logic {
+div.magic-logic {
 	border: 1px solid #ccc;
 	display: inline-block;
 	padding: 0 0 0 10px;
