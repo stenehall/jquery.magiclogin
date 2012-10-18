@@ -31,7 +31,7 @@
  *
  */
 
-/*global document, jQuery */
+/*global jQuery */
 /*jslint sloppy: true, vars: true */
 
 jQuery.fn.magicLogin = function (options) {
@@ -74,7 +74,7 @@ jQuery.fn.magicLogin = function (options) {
 	username.keydown(function (event) {
 		// Catch the first white-space or tab and change focus.
 		if (event.keyCode === 32 || event.keyCode === 9) {
-			password.focus();
+			password.focus().select();
 			return false;
 		} else {
 			update_size(1);
