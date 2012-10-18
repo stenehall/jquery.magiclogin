@@ -1,6 +1,6 @@
 /*
  * Magic login - jQuery plugin
- * written by eighty4	
+ * written by Johan Stenehall
  * http://stenehall.github.com/jQuery.magiclogin/
  *
  * Licensed under something...
@@ -11,16 +11,15 @@
  * Initialize the script with some options.
  ***********************************
 
- jQuery(document).ready(function() 
- {
+ jQuery(document).ready(function() {
 	jQuery('#container').magicLogin({
 
 	});
  });
 
  <div id="container">
-	<input id="username" type="text" value="Username">
-	<input id="password" type="password" value="Password">
+	<input id="username" type="text" value="" placeholder="Username">
+	<input id="password" type="password" value="" placeholder="Password">
 	<input class="submit" type="submit" value="Sign In">
  </div>
 
@@ -33,38 +32,31 @@
  */
 
 /*global document, jQuery */
+/*jslint sloppy: true, vars: true */
 
 jQuery.fn.magicLogin = function (options) {
 
 	// default configuration properties
 	var defaults = {
 		password: '#password',
-		passwordClear: 'password-clear',
 		username: '#username',
 		activeClass: 'magic-logic',
-		passwordSize: 30,
-		usernameSize: 30,
+		maxLength: 15,
 		offset: 1,
 		that: this
-	},
-	username, password, passwordClear, len,
-	update_size = function (offset)
-	{
-		offset = typeof(offset) !== 'undefined' ? offset : options.offset;
+	}, username, password, len;
+
+	var update_size = function (offset) {
+		offset = offset === undefined ? options.offset : offset;
 		len = username.val().length + offset;
-		if (len === 0)
-		{
-			len = 1;
+		if (len === 0) {
+			len = jQuery('#username').attr('placeholder').length;
+		} else if (len > options.maxLength) {
+			len = options.maxLength;
 		}
-		else if (len > options.passwordSize)
-		{
-			len = options.passwordSize;
-		}
-		if (username.attr("size") !== len)
-		{
+		if (username.attr("size") !== len) {
 			username.attr('size', len);
-			var pw_len = (options.passwordSize + options.usernameSize) - len;
-			passwordClear.attr('size', pw_len);
+			var pw_len = (options.maxLength * 2) - len;
 			password.attr('size', pw_len);
 		}
 	};
@@ -75,60 +67,30 @@ jQuery.fn.magicLogin = function (options) {
 	// For easier access
 	username = jQuery(options.username);
 	password = jQuery(options.password);
-	options.defaultUsername = username.attr('value');
 
-	// Our extra input field that displays our password copy from the start
-	passwordClear = jQuery('<input id="' + options.passwordClear + '" type="input" value="' + password.attr('value') + '">').insertAfter(password);
-	password.hide();
+	// Init the lens
+	update_size(8);
 
-	update_size(0);
-
-	username.keydown(function (event)
-	{
+	username.keydown(function (event) {
 		// Catch the first white-space or tab and change focus.
-		if (event.keyCode === 32 || event.keyCode === 9)
-		{
-			passwordClear.focus();
+		if (event.keyCode === 32 || event.keyCode === 9) {
+			password.focus();
 			return false;
-		}
-		else
-		{
+		} else {
 			update_size(1);
 		}
 	});
 
 	/*
-	 * Feels nasty to update the sizes twice but this is the only way I could think of.
+	 * Feels nasty to update the sizes twice but this is the only way I can think of.
 	 * Without it the username size will not update when cleared
 	 */
-	username.keyup(function (event)
-	{
+	username.keyup(function (event) {
 		update_size(0);
 	});
 
-	username.focus(function ()
-	{
-		if (username.attr('value') === options.defaultUsername)
-		{
-			username.attr('value', '');
-			update_size();
-		}
-	});
-
-	username.blur(function ()
-	{
-		if (username.attr('value') === '')
-		{
-			username.attr('value', options.defaultUsername);
-			update_size(0);
-		}
-	});
-
-	passwordClear.focus(function ()
-	{
+	password.keyup(function (event) {
 		update_size(0);
-		passwordClear.hide();
-		password.show();
-		password.focus().select();
 	});
+
 };

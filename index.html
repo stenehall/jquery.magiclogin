@@ -10,10 +10,7 @@
 	<script>
 		jQuery(document).ready(function() 
 		{
-			jQuery('#magiclogin-container').magicLogin({
-				passwordSize: 15,
-				usernameSize: 15
-			});
+			jQuery('#magiclogin-container').magicLogin();
 		});
 	</script>
 </head>
@@ -21,8 +18,8 @@
 		<article>
 			<section class="magic-login">
 				<div id="magiclogin-container">
-					<label><span>Usernam</span><input id="username" type="text" value="Username"></label>
-					<label><span>Password</span><input id="password" type="password" value="Password"></label>
+					<label><span>Username</span><input id="username" type="text" value="" placeholder="Username"></label>
+					<label><span>Password</span><input id="password" type="password" value="" placeholder="Password"></label>
 					<input class="submit" type="submit" value="Sign In">
 				</div>
 			</section>
